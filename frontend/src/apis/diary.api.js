@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/diary";
+const API_URL = process.env.API_URI + "/api/diary";
 
 export const getAllUserDiary = async () => {
   try {
