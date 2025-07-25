@@ -1,11 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
-import authRoutes from "../backend/routes/auth.route.js";
+import authRoutes from "./routes/auth.route.js";
 import diaryRoutes from "./routes/diary.route.js";
 import userRoutes from "./routes/user.route.js";
 import { connectDB } from "./lib/db.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import { fileURLToPath } from "url";
 import path from "path";
 
 dotenv.config();
@@ -13,7 +14,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 
-const __dirname = path.resolve();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 if (process.env.NODE_ENV === "development") {
   app.use(
@@ -35,7 +37,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+    res.sendFile(path.resolve(__dirname, "../frontend", "dist", "index.html"));
   });
 }
 

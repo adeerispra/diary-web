@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = process.env.API_URI + "/api/auth";
+const API_URL = "/api/auth";
 
 export const registerUser = async (userData) => {
   try {
